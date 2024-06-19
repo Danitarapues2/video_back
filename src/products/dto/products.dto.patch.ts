@@ -8,6 +8,10 @@ export class PatchProductDto {
   @IsOptional()
   name: string;
 
+  @IsString({ message: 'La descripción debe ser una cadena de texto' })
+  @Length(3, 50, {
+    message: 'La longitud del nombre debe ser de al menos 3 letras',
+  })
   @IsOptional()
   description: string;
 

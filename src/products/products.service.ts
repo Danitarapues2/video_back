@@ -47,9 +47,10 @@ export class ProductsService {
     return this.productsRepository.save(product);
   }
 
-  async deleteProduct(id: number): Promise<void> {
-    const product = await this.getProductsById(id); // Reutilice el método getUsersById para comprobar si el usuario existe
+  async deleteProduct(id: number): Promise<{ message: string }> {
+    const product = await this.getProductsById(id);
     await this.productsRepository.delete(product);
+    return { message: `Producto ${product.name} eliminado` };
   }
 
   async partialUpdate(

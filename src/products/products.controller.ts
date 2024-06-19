@@ -128,21 +128,21 @@ export class ProductsController {
         errorHttpStatusCode: 400,
         exceptionFactory: () =>
           new BadRequestException(
-            'El ID proporcionado no es un númeroooo entero válido',
+            'El ID proporcionado no es un número entero válido',
           ),
       }),
     )
     id: number,
-  ): Promise<string> {
+  ): Promise<{ message: string }> {
     try {
       await this.productsService.deleteProduct(id);
-      return `Producto con id: ${id} a sido eliminado`;
+      return { message: `Producto con id: ${id} ha sido eliminado` };
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       } else {
         throw new HttpException(
-          `Error en eliminar producto con el id: ${id}`,
+          `Error al eliminar producto con el id: ${id}`,
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }

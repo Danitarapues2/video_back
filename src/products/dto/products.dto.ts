@@ -8,7 +8,11 @@ export class CreateProductDto {
   })
   name: string;
 
-  @IsNotEmpty({ message: 'La descripcion es obligatoria' })
+  @IsString({ message: 'La descripción debe ser una cadena de texto' })
+  @Length(3, 50, {
+    message: 'La longitud de la descripción debe ser de al menos 3 letras',
+  })
+  @IsNotEmpty({ message: 'La descripción es obligatoria' })
   description: string;
 
   @IsNotEmpty({ message: 'El precio es obligatorio' })
